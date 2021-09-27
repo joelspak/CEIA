@@ -12,11 +12,19 @@ def plot(x, city):
     ax.legend(loc='best', shadow=True, fancybox=True, fontsize=25, framealpha=0.5)
     plt.show
 
+
+def display_dataset_distributions(dataset, city):
+    fig = dataset.hist(xlabelsize=12, ylabelsize=12,figsize=(22,10))
+    [x.title.set_size(14) for x in fig.ravel()]
+    plt.tight_layout()
+    plt.show()
+
 print("1. Importando librerias.")
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import sklearn
+import seaborn as sns; sns.set()
 import scipy.stats as stats
 
 # Entrenamiento de modelos de prueba
@@ -53,6 +61,7 @@ print("3. Análisis de datos")
 total_samples = len(df)
 cities = pd.unique(df.Location)
 total_cities = len(cities)
+
 # for city in cities:
 #     mintemp=df[df.Location==city]["Rainfall"]
 #     plot(mintemp, city)
@@ -70,12 +79,40 @@ for city in cities:
 
 ####### Se dropean las columnas Evaporation, Sunshine, Cloud3pm, Cloud9pm ya que hay ausencias 100% en muchas ciudades.
 ###### pese a que parecen datos muy importantes.
-treshold=70
-for column in df.columns:
-    if len(df_nans_per_city[df_nans_per_city[column]>treshold]):
-        df=df.drop(column, axis=1)
+# treshold=70
+# for column in df.columns:
+#     if len(df_nans_per_city[df_nans_per_city[column]>treshold]):
+#         df=df.drop(column, axis=1)
 
 #### una vez dropeadas las columnas con muchos faltantes, procedo a realizar algo para despejar el resto de los Nans.
 #### Los NaNs de Rainfall los dropeo, esto es porque es la variable de salida y no tiene sentido imputarla.
 
 #df=df.dropna()
+# for city in cities:
+#     df_city=df[df.Location==city]
+#     display_dataset_distributions(df_city, city)
+df["TempMedia"]=(df["MaxTemp"]+df["MinTemp"])/2
+df["CloudMedia"]=(df["Cloud9am"]+df["Cloud3pm"])/2
+
+city="SydneyAirport"
+df_city=df[df.Location==city]
+display_dataset_distributions(df_city, city)
+fig,axes = plt.subplots(1,6,figsize=(20,4))
+sns.regplot(x="TempMedia", y="Rainfall", data=df_city, order=1,ax=axes[0])
+sns.regplot(x="MaxTemp", y="Rainfall", data=df_city, order=1,ax=axes[1])
+sns.regplot(x="WindSpeed3pm", y="Rainfall", data=df_city, order=1,ax=axes[2])
+sns.regplot(x="Humidity3pm", y="Rainfall", data=df_city, order=1,ax=axes[3])
+sns.regplot(x="Cloud3pm", y="Rainfall", data=df_city, order=1,ax=axes[4])
+
+fig,axes=plt.subplots(1,4,figsize=(22,6))
+stats.probplot(df_city['TempMedia'], dist="norm", plot=axes[0])
+axes[0].set_title("TempMedia")
+
+stats.probplot(df_city['Cloud3pm'], dist="norm", plot=axes[1])
+axes[1].set_title("Cloud3pm")
+
+stats.probplot(df_city['Humidity3pm'], dist="norm", plot=axes[2])
+axes[2].set_title("Humidity3pm")
+
+stats.probplot(df_city['WindSpeed9am'], dist="norm", plot=axes[3]);
+axes[3].set_title("log(CRIM)")
