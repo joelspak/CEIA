@@ -21,7 +21,7 @@ En este repositorio se encuentran los desafíos resueltos para la materia. A con
 
 ![](https://github.com/joelspak/CEIA/blob/nlp/imgsnlp/bot.JPG)
 ```
-- Entrenamiento con DNN de un bot para Q&A con respuestas predeterminadas según las palabras utilizadas por el usuario. 
+- Entrenamiento con DNN de un bot para Q&A con respuestas predeterminadas.
 - En este caso se utiliza un dataset de una pastelería. 
 ```
 
@@ -30,21 +30,23 @@ En este repositorio se encuentran los desafíos resueltos para la materia. A con
 ![](https://github.com/joelspak/CEIA/blob/nlp/imgsnlp/embedding.JPG)
 ```
 - Custom embeddings con Gensim para encontrar similitud/no similitud entre palabras.
-- Embeddings a base de un dataset de canciones (Twenty One Pilots).
+- El dataset utilizado es de letras de canciones de Twenty One Pilots.
 ```
 
 [**Desafío 4**](https://github.com/joelspak/CEIA/blob/nlp/Clase_4_predicci%C3%B3n_palabra_TWENTY_ONE_PILOTS.ipynb): 
 
 ![](https://github.com/joelspak/CEIA/blob/nlp/imgsnlp/nextword.JPG)
 ```
-- Entrenamiento de LSTM + Embeddings para predicción de próximas palabras en función de un dataset de canciones (Twenty One Pilots).
+- Entrenamiento de LSTM + Embeddings para predicción de próximas palabras
+- El dataset utilizado es de letras de canciones de Twenty One Pilots.
 ```
 
 [**Desafío 5**](https://github.com/joelspak/CEIA/blob/nlp/clothing_ecommerce_reviews.ipynb): 
 
 ![](https://github.com/joelspak/CEIA/blob/nlp/imgsnlp/sentiments.JPG)
 ```
-- Entrenamiento de un modelo LSTM + Embeddings para análisis de sentimientos en críticas de un negocio de ropa. 
+- Entrenamiento de un modelo LSTM + Embeddings para análisis de sentimientos
+- El dataset utilizado es de críticas de un negocio de ropa.
 ```
 
 [**Desafío 6 - data_volunteers dataset**](https://github.com/joelspak/CEIA/blob/nlp/6d_bot_qa_data_volunteers.ipynb) y [**data_intermediate dataset**](https://github.com/joelspak/CEIA/blob/nlp/6d_bot_qa_data_intermediate.ipynb): 
